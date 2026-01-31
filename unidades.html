@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>SUV - Unidades</title>
+
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/unidades.css">
+</head>
+<body>
+
+<header class="header">
+    <button class="header-left" onclick="window.location.href='index.html'">
+        SUV
+    </button>
+
+    <div style="display: flex; gap: 8px;">
+        <button class="header-right" onclick="window.location.href='vagas.html'">
+            Vagas
+        </button>
+        <button class="header-right" onclick="window.location.href='usuarios.html'">
+            Usuários
+        </button>
+        <button class="header-right" onclick="window.location.href='graficos.html'">
+            Gráficos
+        </button>
+    </div>
+</header>
+
+<main>
+    <h1 class="page-title">UNIDADES</h1>
+
+    <div class="top-actions">
+        <button id="add-unidade-btn">Nova unidade</button>
+    </div>
+
+    <section id="unidades-container" class="unidades-container"></section>
+</main>
+
+<!-- Modal Nova Unidade -->
+<div id="unidade-modal" class="modal hidden">
+    <div class="modal-content">
+        <button class="close-btn" id="cancelar-unidade">X</button>
+
+        <h2>Nova Unidade</h2>
+
+        <label>Nome da unidade</label>
+        <input type="text" id="unidade-nome">
+
+        <label>Observações</label>
+        <textarea id="unidade-obs" rows="4"></textarea>
+
+        <div class="modal-actions">
+            <button id="salvar-unidade">Salvar</button>
+            <button id="cancelar-unidade-btn">Cancelar</button>
+        </div>
+    </div>
+</div>
+
+<script src="js/unidades.js"></script>
+
+<script>
+  const role = sessionStorage.getItem("role");
+  if (role !== "admin") {
+    window.location.href = "vagas.html";
+  }
+</script>
+
+</body>
+</html>

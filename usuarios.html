@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>SUV - Sistema Unificado de Vagas</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/usuarios.css">
+</head>
+<body>
+
+<header class="header">
+    <button class="header-left" onclick="window.location.href='index.html'">
+        SUV
+    </button>
+
+    <div style="display: flex; gap: 8px;">
+        <button class="header-right" onclick="window.location.href='vagas.html'">
+            Vagas
+        </button>
+        <button id="graficos-btn" class="header-right" onclick="window.location.href='graficos.html'" style="display: none;">
+            Gráficos
+        </button>
+        <button id="unidades-btn" onclick="window.location.href='unidades.html'">
+            Unidades
+        </button>
+    </div>
+</header>
+
+<main>
+    <h1 class="page-title">USUÁRIOS</h1>
+    
+    <div class="top-actions">
+        <button id="novo-usuario-btn">Novo Usuário</button>
+    </div>
+
+    <section id="usuarios-container" class="usuarios-container"></section>
+</main>
+
+<!-- Modal de cadastro de usuário -->
+<div id="add-user-modal" class="modal hidden">
+    <div class="modal-content">
+        <button class="close-btn" id="close-add-user-modal">X</button>
+
+        <h2>Novo Usuário</h2>
+
+        <label>Nome</label>
+        <input type="text" id="novo-nome">
+
+        <label>Unidade</label>
+        <select id="user-unidade"></select>
+
+        <label>Login</label>
+        <input type="text" id="novo-login">
+
+        <div class="modal-actions">
+            <button id="submit-user">Enviar</button>
+            <button id="cancel-user">Cancelar</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de exibição de senha -->
+<div id="senha-modal" class="modal hidden">
+    <div class="modal-content">
+        <h2>Usuário Criado!</h2>
+        
+        <p style="text-align: center; margin: 16px 0; color: #666;">
+            Copie a senha, ela não aparecerá novamente
+        </p>
+
+        <div id="senha-display" style="background: #f0f0f0; border: 1px solid #000; padding: 12px; text-align: center; font-weight: bold; margin: 16px 0;"></div>
+
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+            <button id="copiar-senha-btn" style="width: 100%; padding: 10px; background: #000; color: #fff;">
+                Copiar Senha
+            </button>
+            <button id="fechar-senha-modal" style="width: 100%; padding: 10px; background: #fff; color: #000;">
+                Fechar
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de confirmação de exclusão -->
+<div id="delete-user-modal" class="modal hidden">
+    <div class="modal-content">
+        <button class="close-btn" id="close-delete-modal">X</button>
+        
+        <h2>Confirmar Exclusão</h2>
+        <p style="text-align: center; margin: 16px 0;">
+            Tem certeza que deseja excluir este usuário?
+        </p>
+
+        <div class="modal-actions">
+            <button id="confirm-delete-user">Sim</button>
+            <button id="cancel-delete-user">Não</button>
+        </div>
+    </div>
+</div>
+
+<script src="js/usuarios.js"></script>
+
+<script>
+    const graficosBtn = document.getElementById("graficos-btn");
+    if (sessionStorage.getItem("role") === "admin" && graficosBtn) {
+        graficosBtn.style.display = "block";
+    }
+
+    const role = sessionStorage.getItem("role");
+    if (role !== "admin") {
+        const btn = document.getElementById("unidades-btn");
+        if (btn) btn.style.display = "none";
+    }
+</script>
+
+</body>
+</html>

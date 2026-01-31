@@ -1,0 +1,99 @@
+/* ---- Página ---- */
+
+.page-title {
+  text-align: center;
+  margin: 32px 0;
+}
+
+/* ---- Container ---- */
+
+.unidades-container {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+}
+
+/* ---- Card da unidade ---- */
+
+.unidade-card {
+  border: 1px solid #000;
+  padding: 16px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  position: relative;
+}
+
+.unidade-card p {
+  margin: 4px 0;
+}
+
+/* ---- Top actions ---- */
+
+.top-actions {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.top-actions button {
+  padding: 10px 24px;
+  background: #000;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+/* ---- Modal inputs (input, select, textarea) ---- */
+
+.modal-content label {
+  display: block;
+  margin-top: 12px;
+  font-weight: bold;
+}
+
+.modal-content input,
+.modal-content select,
+.modal-content textarea {
+  width: 100%;
+  padding: 8px;
+  margin-top: 6px;
+  border: 1px solid #000;
+  font-size: 14px;
+  font-family: inherit;
+  box-sizing: border-box;
+  background: #fff;
+}
+
+/* ---- Select ---- */
+
+.modal-content select {
+  cursor: pointer;
+}
+
+/* ---- Textarea ---- */
+
+.modal-content textarea {
+  resize: none;      /* não redimensionável */
+  height: 100px;     /* tamanho fixo */
+  line-height: 1.4;
+}
+
+/* ---- Modal actions ---- */
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.modal-actions button {
+  padding: 8px 20px;
+  border: 1px solid #000;
+  background: #000;
+  color: #fff;
+  cursor: pointer;
+}

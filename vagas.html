@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>SUV - Sistema Unificado de Vagas</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/vagas.css">
+</head>
+<body>
+
+<header class="header">
+    <button class="header-left" onclick="window.location.href='index.html'">
+        SUV
+    </button>
+
+    <div style="display: flex; gap: 8px;">
+        <button id="usuarios-btn" class="header-right" onclick="window.location.href='usuarios.html'" style="display: none;">
+            Usuários
+        </button>
+        <button id="graficos-btn" class="header-right" onclick="window.location.href='graficos.html'" style="display: none;">
+            Gráficos
+        </button>
+        <button id="unidades-btn" onclick="window.location.href='unidades.html'">
+          Unidades
+        </button>
+
+    </div>
+</header>
+
+  <main>
+    <h1 class="page-title">VAGAS</h1>
+    <div class="tabs">
+        <button class="tab-btn active" data-tab="lista">Lista</button>
+        <button class="tab-btn" data-tab="horizontal">Horizontal</button>
+        <button class="tab-btn" data-tab="calendario">Calendário</button>
+    </div>
+
+    <!-- Tab: Lista -->
+    <div id="tab-lista" class="tab-content">
+        <div class="top-actions">
+            <button id="add-vaga-btn">Adicionar Vaga</button>
+        </div>
+        <section id="vagas-container" class="vagas-container"></section>
+    </div>
+
+    <!-- Tab: Horizontal -->
+    <div id="tab-horizontal" class="tab-content hidden">
+        <div class="horizontal-filters">
+            <div class="filter-group">
+                <label for="filtro-unidade">Filtro de unidades</label>
+                <select id="filtro-unidade"></select>
+            </div>
+            <div class="filter-group">
+                <label for="filtro-especialidade">Filtro de especialidades</label>
+                <select id="filtro-especialidade"></select>
+            </div>
+        </div>
+
+        <div class="horizontal-wrapper">
+            <button id="seta-esquerda" class="seta-btn" disabled>◀</button>
+            <div class="table-scroll-container">
+                <table id="tabela-horizontal" class="tabela-horizontal">
+                    <thead>
+                        <tr>
+                            <th class="col-horario">Horário</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            <button id="seta-direita" class="seta-btn" disabled>▶</button>
+        </div>
+
+        <div id="loading-horizontal" class="loading hidden">
+            <div class="spinner"></div>
+        </div>
+    </div>
+
+    <!-- Tab: Calendário -->
+    <div id="tab-calendario" class="tab-content hidden">
+        <p style="text-align: center; margin-top: 32px; color: #666;">Calendário será implementado futuramente.</p>
+    </div>
+
+  </main>
+
+  <!-- Modal de confirmação -->
+  <div id="modal" class="modal hidden">
+    <div class="modal-content">
+      <p>Tem certeza que deseja excluir esta vaga?</p>
+      <div class="modal-actions">
+        <button id="confirm-delete">Sim</button>
+        <button id="cancel-delete">Não</button>
+      </div>
+    </div>
+  </div>
+
+    <div id="add-modal" class="modal hidden">
+        <div class="modal-content">
+
+            <button class="close-btn" id="close-add-modal">X</button>
+
+            <h2>Nova vaga</h2>
+
+            <label>Especialidade</label>
+            <input type="text" id="nova-especialidade">
+
+            <label>Unidade</label>
+            <select id="nova-unidade"></select>
+
+            <label>Criticidade</label>
+            <input type="text" id="nova-criticidade">
+
+            <label>Data</label>
+            <input type="date" id="nova-data">
+
+            <label>Horário</label>
+            <select id="novo-horario"></select>
+
+        <div class="modal-actions">
+        <button id="submit-vaga">Enviar</button>
+        <button id="cancel-vaga">Cancelar</button>
+    </div>
+
+    </div>
+    </div>
+
+
+  
+  <script src="js/vagasRender.js"></script>
+  <script src="js/vagasHorizontal.js"></script>
+  <script>
+    const loginBtn = document.getElementById("login-btn");
+    const usuariosBtn = document.getElementById("usuarios-btn");
+    const graficosBtn = document.getElementById("graficos-btn");
+    const role = sessionStorage.getItem("role");
+
+    if (loginBtn) loginBtn.style.display = "none";
+
+    if (sessionStorage.getItem("role") === "admin" && usuariosBtn) {
+        usuariosBtn.style.display = "block";
+    }
+    
+    if (sessionStorage.getItem("role") === "admin" && graficosBtn) {
+        graficosBtn.style.display = "block";
+    }
+
+    if (role !== "admin") {
+      document
+        .querySelector('[data-tab="horizontal"]')
+        ?.remove();
+
+      document
+        .querySelector('[data-tab="calendario"]')
+        ?.remove();
+    }
+
+    if (role !== "admin") {
+      const btn = document.getElementById("unidades-btn");
+      if (btn) btn.style.display = "none";
+    }
+  </script>
+</body>
+</html>

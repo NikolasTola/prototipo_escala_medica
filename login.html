@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>SUV - Sistema Unificado de Vagas</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/login.css">
+</head>
+<body class="login-page">
+
+    <header class="header">
+        <button class="header-left" onclick="window.location.href='index.html'">
+            SUV
+        </button>
+
+        <button id="login-btn" class="header-right"
+                onclick="window.location.href='login.html'">
+            Login
+        </button>
+    </header>
+
+  <main class="login-container">
+    <h1>Login</h1>
+
+    <form onsubmit="handleLogin(event)">
+      <label for="login">Usuário</label>
+      <input type="text" id="login" required />
+
+      <label for="password">Senha</label>
+      <input type="password" id="password" required />
+
+      <button type="submit">Entrar</button>
+    </form>
+
+    <p id="error" class="error"></p>
+  </main>
+
+  <script src="js/login.js"></script>
+  <script>
+    const loginBtn = document.getElementById("login-btn");
+    if (loginBtn) loginBtn.style.display = "none";
+  </script>
+</body>
+</html>

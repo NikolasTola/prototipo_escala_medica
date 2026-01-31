@@ -1,2 +1,2 @@
-# prototipo_escala_medica
-Prototipo
+# prototipo-escala-medica
+prototipo-escala-medica

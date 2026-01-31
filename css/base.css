@@ -1,0 +1,103 @@
+/* Reset e base */
+
+* {
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  margin: 0;
+  background: #fff;
+  color: #000;
+}
+
+button {
+  border: 1px solid #000;
+  cursor: pointer;
+}
+
+/* Modal (componente global) */
+
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: #fff;
+  border: 1px solid #000;
+  padding: 20px;
+  width: 300px;
+  text-align: center;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16px;
+}
+
+.modal-actions button {
+  width: 45%;
+  padding: 8px;
+  background: #fff;
+}
+
+.hidden {
+  display: none;
+}
+
+.top-actions {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.top-actions button {
+  padding: 10px 16px;
+  background: #000;
+  color: #fff;
+}
+
+.close-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: #fff;
+  border: 1px solid #000;
+  cursor: pointer;
+}
+
+.modal-content {
+  position: relative;
+}
+
+.modal-content h2 {
+  margin-top: 0;
+}
+
+.modal-content input {
+  width: 100%;
+  padding: 6px;
+  margin: 6px 0 12px;
+  border: 1px solid #000;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid #000;
+}
+
+.header button {
+  background: #fff;
+  padding: 8px 12px;
+}
+
+

@@ -1,0 +1,14 @@
+.graficos-content {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  text-align: center;
+}
+
+.graficos-content img {
+  width: 100%;
+  border: 1px solid #000;
+}

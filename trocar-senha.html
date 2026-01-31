@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>SUV - Trocar Senha</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/login.css">
+</head>
+<body class="login-page">
+
+  <main class="login-container">
+    <h1>Trocar Senha</h1>
+    <p style="text-align: center; margin-bottom: 16px; font-size: 14px;">
+      Este é seu primeiro acesso. Por favor, defina uma nova senha.
+    </p>
+
+    <form onsubmit="handleTrocarSenha(event)">
+      <label for="nova-senha">Nova Senha</label>
+      <input type="password" id="nova-senha" required />
+
+      <label for="confirmar-senha">Confirmar Senha</label>
+      <input type="password" id="confirmar-senha" required />
+
+      <div style="margin: 12px 0;">
+        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+          <input type="checkbox" id="mostrar-senhas" style="width: auto;">
+          <span style="font-size: 14px;">Mostrar senhas</span>
+        </label>
+      </div>
+
+      <p style="font-size: 12px; margin-top: 8px; color: #666; border: 1px solid #000; padding: 8px; background: #f0f0f0;">
+        <strong>A senha deve ter:</strong><br>
+        • No mínimo 6 caracteres<br>
+        • Pelo menos 1 letra maiúscula<br>
+        • Pelo menos 1 letra minúscula<br>
+        • Pelo menos 1 número
+      </p>
+
+      <button type="submit">Confirmar</button>
+    </form>
+
+    <p id="error" class="error"></p>
+  </main>
+
+  <script src="js/trocar-senha.js"></script>
+</body>
+</html>

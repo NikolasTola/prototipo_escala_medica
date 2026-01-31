@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>SUV - Sistema Unificado de Vagas</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/graficos.css">
+</head>
+<body>
+
+  <header class="header">
+      <button class="header-left" onclick="window.location.href='index.html'">
+        SUV
+      </button>
+
+      <div style="display: flex; gap: 8px;">
+        <button id="usuarios-btn" class="header-right" onclick="window.location.href='usuarios.html'" style="display: none;">
+          Usuários
+        </button>
+        <button class="header-right" onclick="window.location.href='vagas.html'">
+          Vagas
+        </button>
+        <button id="unidades-btn" onclick="window.location.href='unidades.html'">
+          Unidades
+        </button>
+      </div>
+    </header>
+
+  <main class="graficos-content">
+    <h1>Gráficos</h1>
+
+    <img src="imagens/grafico_1.gif" alt="Gráfico 1">
+    <img src="imagens/grafico_2.jpg" alt="Gráfico 2">
+    <img src="imagens/grafico_3.png" alt="Gráfico 3">
+  </main>
+  <script>
+    const usuariosBtn = document.getElementById("usuarios-btn");
+    if (sessionStorage.getItem("role") === "admin" && usuariosBtn) {
+        usuariosBtn.style.display = "block";
+    }
+
+    const role = sessionStorage.getItem("role");
+    if (role !== "admin") {
+      const btn = document.getElementById("unidades-btn");
+      if (btn) btn.style.display = "none";
+    }
+  </script>
+</body>
+</html>
