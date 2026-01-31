@@ -6,6 +6,7 @@ const cancelDeleteBtn = document.getElementById("cancel-delete");
 const addModal = document.getElementById("add-modal");
 const userRole = sessionStorage.getItem("role");
 const addBtn = document.getElementById("add-vaga-btn");
+const filtroListaStatus = document.getElementById("filtro-lista-status");
 
 const closeAddModal = document.getElementById("close-add-modal");
 const cancelVaga = document.getElementById("cancel-vaga");
@@ -248,19 +249,22 @@ function renderVagas() {
 
   vagas
     .filter(vaga => {
-      // Regra de unidade por role
+      // Regra de unidade (já existente)
       if (userRole !== "admin" && vaga.unidade !== userUnidade) {
         return false;
       }
 
-      if (unidadeFiltro && vaga.unidade !== unidadeFiltro) return false;
-      if (especialidadeFiltro && vaga.especialidade !== especialidadeFiltro) return false;
-      if (criticidadeFiltro && vaga.criticidade !== criticidadeFiltro) return false;
+      // Filtro de status
+      if (filtroListaStatus.value === "preenchidas" && !vaga.preenchida) {
+        return false;
+      }
+
+      if (filtroListaStatus.value === "nao-preenchidas" && vaga.preenchida) {
+        return false;
+      }
 
       return true;
-    })
-    .forEach(vaga => {
-
+    }).forEach(vaga => {
 
     const card = document.createElement("div");
     card.className = "vaga-card";
@@ -300,10 +304,15 @@ function renderVagas() {
   });
 }
 
-[filtroListaUnidade, filtroListaEspecialidade, filtroListaCriticidade]
-  .forEach(filtro => {
-    filtro.addEventListener("change", renderVagas);
-  });
+[
+  filtroListaUnidade,
+  filtroListaEspecialidade,
+  filtroListaCriticidade,
+  filtroListaStatus
+].forEach(filtro => {
+  filtro.addEventListener("change", renderVagas);
+});
+
 
 
 function toggleVaga(cardId) {

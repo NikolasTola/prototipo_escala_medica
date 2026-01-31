@@ -37,6 +37,8 @@
 
     <!-- Tab: Lista -->
     <div id="tab-lista" class="tab-content">
+
+      <div class="lista-filtros">
         <div class="horizontal-filters">
             <div class="filter-group">
                 <label for="filtro-lista-unidade">Unidade</label>
@@ -54,11 +56,21 @@
             </div>
         </div>
 
-        <div class="top-actions">
-            <button id="add-vaga-btn">Adicionar Vaga</button>
+        <div class="filter-group">
+          <label for="filtro-lista-status">Status da vaga</label>
+          <select id="filtro-lista-status">
+            <option value="">Todas</option>
+            <option value="preenchidas">Preenchidas</option>
+            <option value="nao-preenchidas">Não preenchidas</option>
+          </select>
         </div>
+      </div>
 
-        <section id="vagas-container" class="vagas-container"></section>
+      <div class="top-actions">
+          <button id="add-vaga-btn">Adicionar Vaga</button>
+      </div>
+
+      <section id="vagas-container" class="vagas-container"></section>
     </div>
 
     <!-- Tab: Horizontal -->
