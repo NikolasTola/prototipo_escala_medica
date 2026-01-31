@@ -37,9 +37,27 @@
 
     <!-- Tab: Lista -->
     <div id="tab-lista" class="tab-content">
+        <div class="horizontal-filters">
+            <div class="filter-group">
+                <label for="filtro-lista-unidade">Unidade</label>
+                <select id="filtro-lista-unidade"></select>
+            </div>
+
+            <div class="filter-group">
+                <label for="filtro-lista-especialidade">Especialidade</label>
+                <select id="filtro-lista-especialidade"></select>
+            </div>
+
+            <div class="filter-group">
+                <label for="filtro-lista-criticidade">Criticidade</label>
+                <select id="filtro-lista-criticidade"></select>
+            </div>
+        </div>
+
         <div class="top-actions">
             <button id="add-vaga-btn">Adicionar Vaga</button>
         </div>
+
         <section id="vagas-container" class="vagas-container"></section>
     </div>
 

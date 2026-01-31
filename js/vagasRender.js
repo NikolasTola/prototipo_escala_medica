@@ -12,6 +12,11 @@ const cancelVaga = document.getElementById("cancel-vaga");
 const submitVaga = document.getElementById("submit-vaga");
 const userUnidade = localStorage.getItem("userUnidade");
 
+const filtroListaUnidade = document.getElementById("filtro-lista-unidade");
+const filtroListaEspecialidade = document.getElementById("filtro-lista-especialidade");
+const filtroListaCriticidade = document.getElementById("filtro-lista-criticidade");
+
+
 let cardIdToDelete = null;
 
 // Lista de horários para o modal de nova vaga
@@ -149,6 +154,44 @@ addBtn.onclick = () => {
   addModal.classList.remove("hidden");
 };
 
+function preencherFiltrosLista() {
+  const unidades = [...new Set(vagas.map(v => v.unidade))];
+  const especialidades = [...new Set(vagas.map(v => v.especialidade))];
+  const criticidades = [...new Set(vagas.map(v => v.criticidade))];
+
+  // Limpa
+  filtroListaUnidade.innerHTML = `<option value="">Todas</option>`;
+  filtroListaEspecialidade.innerHTML = `<option value="">Todas</option>`;
+  filtroListaCriticidade.innerHTML = `<option value="">Todas</option>`;
+
+  unidades.forEach(u => {
+    const opt = document.createElement("option");
+    opt.value = u;
+    opt.textContent = u;
+    filtroListaUnidade.appendChild(opt);
+  });
+
+  especialidades.forEach(e => {
+    const opt = document.createElement("option");
+    opt.value = e;
+    opt.textContent = e;
+    filtroListaEspecialidade.appendChild(opt);
+  });
+
+  criticidades.forEach(c => {
+    const opt = document.createElement("option");
+    opt.value = c;
+    opt.textContent = c;
+    filtroListaCriticidade.appendChild(opt);
+  });
+
+  // Cliente → unidade travada
+  if (userRole !== "admin") {
+    filtroListaUnidade.value = userUnidade;
+    filtroListaUnidade.disabled = true;
+  }
+}
+
 
 function closeAddVagaModal() {
   addModal.classList.add("hidden");
@@ -189,6 +232,7 @@ submitVaga.onclick = () => {
 
   localStorage.setItem("vagas", JSON.stringify(vagas));
   closeAddVagaModal();
+  preencherFiltrosLista();
   renderVagas();
 
   inicializarHorizontal();
@@ -198,15 +242,25 @@ submitVaga.onclick = () => {
 function renderVagas() {
   container.innerHTML = "";
 
-  const userUnidade = localStorage.getItem("userUnidade");
+  const unidadeFiltro = filtroListaUnidade.value;
+  const especialidadeFiltro = filtroListaEspecialidade.value;
+  const criticidadeFiltro = filtroListaCriticidade.value;
 
   vagas
     .filter(vaga => {
-      if (userRole === "admin") return true;
-      if (!userUnidade) return false;
-      return vaga.unidade === userUnidade;
+      // Regra de unidade por role
+      if (userRole !== "admin" && vaga.unidade !== userUnidade) {
+        return false;
+      }
+
+      if (unidadeFiltro && vaga.unidade !== unidadeFiltro) return false;
+      if (especialidadeFiltro && vaga.especialidade !== especialidadeFiltro) return false;
+      if (criticidadeFiltro && vaga.criticidade !== criticidadeFiltro) return false;
+
+      return true;
     })
     .forEach(vaga => {
+
 
     const card = document.createElement("div");
     card.className = "vaga-card";
@@ -246,6 +300,12 @@ function renderVagas() {
   });
 }
 
+[filtroListaUnidade, filtroListaEspecialidade, filtroListaCriticidade]
+  .forEach(filtro => {
+    filtro.addEventListener("change", renderVagas);
+  });
+
+
 function toggleVaga(cardId) {
   if (userRole !== "admin") return;
 
@@ -281,6 +341,7 @@ confirmDeleteBtn.onclick = () => {
   vagas = vagas.filter(v => v.card_id !== cardIdToDelete);
   localStorage.setItem("vagas", JSON.stringify(vagas));
   modal.classList.add("hidden");
+  preencherFiltrosLista();
   renderVagas();
 
   // Atualiza a tabela horizontal
@@ -314,4 +375,5 @@ tabBtns.forEach(btn => {
   });
 });
 
+preencherFiltrosLista();
 renderVagas();
